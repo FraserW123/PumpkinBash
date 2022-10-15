@@ -3,12 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/frase/AndroidStudioProjects/assignment3/app/src/main/res/layout/activity_main.xml" value="0.2" />
-        <entry key="..\:/Users/frase/AndroidStudioProjects/assignment3/app/src/main/res/layout/activity_options.xml" value="0.3625" />
+        <entry key="..\:/Users/lazar/AndroidStudioProjects/assignment3/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/lazar/AndroidStudioProjects/assignment3/app/src/main/res/layout/activity_welcome_screen.xml" value="0.4" />
+        <entry key="..\:/Users/lazar/AndroidStudioProjects/assignment3/app/src/main/res/layout/game_screen.xml" value="0.1940222897669706" />
+        <entry key="..\:/Users/lazar/AndroidStudioProjects/assignment3/app/src/main/res/layout/help_screen.xml" value="0.4" />
+        <entry key="..\:/Users/lazar/AndroidStudioProjects/assignment3/app/src/main/res/layout/options_screen.xml" value="0.4" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
