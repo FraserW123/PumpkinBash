@@ -14,8 +14,28 @@
         android:theme="@style/Theme.Assignment3"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".OptionsScreen"
+            android:exported="false"
+            android:parentActivityName=".MainMenu"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".HelpScreen"
+            android:exported="false"
+            android:parentActivityName=".MainMenu"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".MainMenu"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".GameScreen"
+            android:exported="false"
+            android:parentActivityName=".MainMenu"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".WelcomeScreen"
+            android:exported="true"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
