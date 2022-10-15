@@ -13,4 +13,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "assignment3"
-include ':app'
+//include ':app'
+include ':testUI'
