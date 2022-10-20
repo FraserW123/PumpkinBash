@@ -2,6 +2,7 @@ package com.example.assignment3;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -23,7 +24,9 @@ public class OptionsScreen extends AppCompatActivity {
 
         createMinesRadioButtons();
         createBoardSizeRadioButtons();
-        setSaveChanges();
+        String savedSize = getBoardSize(this);
+        int savedMines = getNumMines(this);
+        //setSaveChanges();
     }
 
     private void createBoardSizeRadioButtons() {
@@ -37,18 +40,36 @@ public class OptionsScreen extends AppCompatActivity {
             RadioButton button = new RadioButton(this);
             button.setText(boardSize);
 
-            //TODO: Set on click callbacks
             button.setOnClickListener(v -> {
                 Toast.makeText(OptionsScreen.this, "Board will be "+boardSize,
                     Toast.LENGTH_SHORT).show();
                 sizeofDimensions(boardSize);
-
-
+                saveBoardSize(boardSize);
             });
 
             //Add to radio group
             group.addView(button);
+            System.out.println(boardSize + " vs " + getBoardSize(this));
+            if(boardSize.equals(getBoardSize(this))){
+                sizeofDimensions(boardSize);
+                button.setChecked(true);
+            }else{
+
+                System.out.println("false");
+            }
         }
+        //group
+    }
+
+    private void saveBoardSize(String size) {
+        SharedPreferences prefs = this.getSharedPreferences("AppSizePrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("Size", size);
+        editor.apply();
+    }
+    static public String getBoardSize(Context context){
+        SharedPreferences prefs = context.getSharedPreferences("AppSizePrefs", MODE_PRIVATE);
+        return prefs.getString("Size", "");
     }
 
     private void createMinesRadioButtons() {
@@ -63,49 +84,37 @@ public class OptionsScreen extends AppCompatActivity {
             RadioButton button = new RadioButton(this);
             button.setText(getString(R.string.mines, numMine));
 
-            //TODO: Set on click callbacks
             button.setOnClickListener(v -> {
                 Toast.makeText(OptionsScreen.this, "You selected "+numMine,
                         Toast.LENGTH_SHORT).show();
                 game.setNumMines(numMine);
+                saveNumMines(numMine);
             });
 
             //Add to radio group
             group.addView(button);
+
+            // Select default button
+            if(numMine == getNumMines(this)){
+                game.setNumMines(numMine);
+                button.setChecked(true);
+            }
+
         }
     }
 
-    private void setSaveChanges() {
-        Game game = Game.getGameInstance();
-        Button btn = findViewById(R.id.find_selected);
-        btn.setOnClickListener(v -> {
-            RadioGroup group_Mines = findViewById(R.id.radio_group_mines);
-            int idOfSelectedMines = group_Mines.getCheckedRadioButtonId();
-            RadioButton mineSelection = findViewById(idOfSelectedMines);
-
-
-            RadioGroup group_board_size = findViewById(R.id.radio_board_size);
-            int idOfSelectedBoardSize = group_board_size.getCheckedRadioButtonId();
-            RadioButton boardSelection = findViewById(idOfSelectedBoardSize);
-
-            if(game.getNumMines() != 0){
-                String message = mineSelection.getText().toString();
-                String message2 = boardSelection.getText().toString();
-                Toast.makeText(OptionsScreen.this, "Adding game configuration: " + message +
-                        " Board size: " + message2,
-                        Toast.LENGTH_SHORT).show();
-
-            }
-            else{
-                Toast.makeText(OptionsScreen.this, "No option have been selected",
-                        Toast.LENGTH_SHORT).show();
-
-            }
-
-        });
+    private void saveNumMines(int mines) {
+        SharedPreferences prefs = this.getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("Num mines", mines);
+        editor.apply();
+    }
+    static public int getNumMines(Context context){
+        SharedPreferences prefs = context.getSharedPreferences("AppPrefs",MODE_PRIVATE);
+        return prefs.getInt("Num mines", 0);
     }
 
-    private void sizeofDimensions(String size){
+    static public void sizeofDimensions(String size){
         Game game = Game.getGameInstance();
         switch (size) {
             case "4 x 6":
@@ -126,4 +135,40 @@ public class OptionsScreen extends AppCompatActivity {
     public static Intent makeIntent(Context context){
         return new Intent(context, OptionsScreen.class);
     }
+
+
+
+
+//    private void setSaveChanges() {
+//        Game game = Game.getGameInstance();
+//        Button btn = findViewById(R.id.find_selected);
+//        btn.setOnClickListener(v -> {
+//
+//            if(game.getNumMines() != 0){
+//                RadioGroup group_Mines = findViewById(R.id.radio_group_mines);
+//                int idOfSelectedMines = group_Mines.getCheckedRadioButtonId();
+//                RadioButton mineSelection = findViewById(idOfSelectedMines);
+//
+//
+//                RadioGroup group_board_size = findViewById(R.id.radio_board_size);
+//                int idOfSelectedBoardSize = group_board_size.getCheckedRadioButtonId();
+//                RadioButton boardSelection = findViewById(idOfSelectedBoardSize);
+//
+//                String message = mineSelection.getText().toString();
+//                String message2 = boardSelection.getText().toString();
+//                Toast.makeText(OptionsScreen.this, "Adding game configuration: " + message +
+//                        " Board size: " + message2,
+//                        Toast.LENGTH_SHORT).show();
+//
+//            }
+//            else{
+//                Toast.makeText(OptionsScreen.this, "No option have been selected",
+//                        Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//        });
+//    }
+
+
 }

@@ -2,8 +2,8 @@ package com.example.assignment3.model;
 import java.util.Random;
 
 public class Game {
-    int MAP_ROW ;
-    int MAP_COLUMN;
+    int MAP_ROW = 0;
+    int MAP_COLUMN = 0;
     private int numMines;
     boolean[][] minePlaced;
 
@@ -48,6 +48,9 @@ public class Game {
     public int getMAP_COLUMN(){
         return MAP_COLUMN;
     }
+
+    public void setScans(int scans){this.scans = scans;}
+    public void setFound(int found){this.found = found;}
 
     public void setMapSize(int row, int col){
         MAP_ROW = row;

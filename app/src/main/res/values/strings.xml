@@ -5,5 +5,5 @@
     <string name="number_of_mines">Number of Mines</string>
     <string name="BoardSize">Board Size</string>
     <string name="scans_used"># scans used %1$d</string>
-    <string name="found_mines">\"found mines \"</string>
+    <string name="found_mines">found mines  </string>
 </resources>

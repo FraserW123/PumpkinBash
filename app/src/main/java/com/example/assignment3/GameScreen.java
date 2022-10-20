@@ -2,6 +2,7 @@ package com.example.assignment3;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Path;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,6 @@ public class GameScreen extends AppCompatActivity {
 //    private static final int NUM_ROWS = 6;
 //    private static final int NUM_COLS = 15;
     Game game = Game.getGameInstance();
-    public  Button[][] grid = new Button[game.getMAP_ROW()][game.getMAP_COLUMN()];
 
 
 
@@ -26,22 +26,27 @@ public class GameScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_screen);
+        configureGame();
         showStats();
         populateButtons();
 
     }
 
+
+
     private void showStats() {
         Game game = Game.getGameInstance();
         TextView scans = findViewById(R.id.tvScans);
         TextView found = findViewById(R.id.tvMinesFound);
-        found.setText(getString(R.string.found_mines) + game.getFound() + " of " + game.getNumMines());
+        found.setText(getString(R.string.found_mines) + " " +game.getFound() + " of " + game.getNumMines());
         scans.setText(getString(R.string.scans_used, game.getNumScans()));
     }
 
     private void populateButtons() {
         Game game = Game.getGameInstance();
-        game.setMap();
+
+
+        Button[][] grid = new Button[game.getMAP_ROW()][game.getMAP_COLUMN()];
         TableLayout table = findViewById(R.id.tableForButtons);
         for (int row = 0; row < game.getMAP_ROW(); row++){
             TableRow tableRow = new TableRow(this);
@@ -72,6 +77,24 @@ public class GameScreen extends AppCompatActivity {
 
             }
         }
+    }
+
+    private void configureGame(){
+        Game game = Game.getGameInstance();
+
+        game.setNumMines(OptionsScreen.getNumMines(this));
+        OptionsScreen.sizeofDimensions(OptionsScreen.getBoardSize(this));
+        if(game.getMAP_ROW() == 0 && game.getMAP_COLUMN() == 0){
+            System.out.println("Nothing selected");
+            game.setMapSize(4,6);
+        }
+        if(game.getNumMines() == 0){
+            game.setNumMines(6);
+        }
+        game.setScans(0);
+        game.setFound(0);
+        game.setMap();
+
     }
 
     private void gridButtonClicked(Button button, int row, int col){
