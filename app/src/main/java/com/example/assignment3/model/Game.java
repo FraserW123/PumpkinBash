@@ -119,10 +119,11 @@ public class Game {
                     count++;
                 }
             }
-            scans++;
+
             squareScores[row][col] = String.valueOf(count);
 
         }
+        scans++;
         System.out.println("count " + count);
 
 

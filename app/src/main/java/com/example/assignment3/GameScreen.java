@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,8 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.assignment3.model.Game;
 
 public class GameScreen extends AppCompatActivity {
-    private static final int NUM_ROWS = 6;
-    private static final int NUM_COLS = 15;
+//    private static final int NUM_ROWS = 6;
+//    private static final int NUM_COLS = 15;
     Game game = Game.getGameInstance();
     public  Button[][] grid = new Button[game.getMAP_ROW()][game.getMAP_COLUMN()];
 
@@ -25,14 +26,17 @@ public class GameScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_screen);
-
-        populateButtons();
         showStats();
+        populateButtons();
+
     }
 
     private void showStats() {
         Game game = Game.getGameInstance();
-
+        TextView scans = findViewById(R.id.tvScans);
+        TextView found = findViewById(R.id.tvMinesFound);
+        found.setText(getString(R.string.found_mines) + game.getFound() + " of " + game.getNumMines());
+        scans.setText(getString(R.string.scans_used, game.getNumScans()));
     }
 
     private void populateButtons() {
@@ -61,6 +65,7 @@ public class GameScreen extends AppCompatActivity {
                     @Override
                     public void onClick(View v){
                         gridButtonClicked(grid[finalRow][finalCol], finalRow, finalCol);
+                        showStats();
                     }
                 });
                 tableRow.addView(button);
