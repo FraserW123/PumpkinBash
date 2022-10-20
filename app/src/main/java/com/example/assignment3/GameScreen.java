@@ -16,6 +16,10 @@ import com.example.assignment3.model.Game;
 public class GameScreen extends AppCompatActivity {
     private static final int NUM_ROWS = 6;
     private static final int NUM_COLS = 15;
+    Game game = Game.getGameInstance();
+    public  Button[][] grid = new Button[game.getMAP_ROW()][game.getMAP_COLUMN()];
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +27,19 @@ public class GameScreen extends AppCompatActivity {
         setContentView(R.layout.game_screen);
 
         populateButtons();
+        showStats();
+    }
+
+    private void showStats() {
+        Game game = Game.getGameInstance();
+
     }
 
     private void populateButtons() {
-        TableLayout table = (TableLayout) findViewById(R.id.tableForButtons);
-        for (int row = 0; row < NUM_ROWS; row++){
+        Game game = Game.getGameInstance();
+        game.setMap();
+        TableLayout table = findViewById(R.id.tableForButtons);
+        for (int row = 0; row < game.getMAP_ROW(); row++){
             TableRow tableRow = new TableRow(this);
             tableRow.setLayoutParams(new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.MATCH_PARENT,
@@ -35,17 +47,20 @@ public class GameScreen extends AppCompatActivity {
                     1.0f));
             table.addView(tableRow);
 
-            for (int col = 0; col < NUM_COLS; col++){
+            for (int col = 0; col < game.getMAP_COLUMN(); col++){
                 Button button = new Button(this);
+                grid[row][col] = button;
                 button.setLayoutParams(new TableRow.LayoutParams(
                         TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT,
                         1.0f));
 
+                int finalRow = row;
+                int finalCol = col;
                 button.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
-                        gridButtonClicked();
+                        gridButtonClicked(grid[finalRow][finalCol], finalRow, finalCol);
                     }
                 });
                 tableRow.addView(button);
@@ -54,8 +69,11 @@ public class GameScreen extends AppCompatActivity {
         }
     }
 
-    private void gridButtonClicked(){
-        //Game game = Game.getGameInstance();
+    private void gridButtonClicked(Button button, int row, int col){
+        Game game = Game.getGameInstance();
+        game.checkMap(row,col);
+        String score = game.getSquareScore(row,col);
+        button.setText(score);
         Toast.makeText(this, "Button clicked", Toast.LENGTH_SHORT).show();
     }
 

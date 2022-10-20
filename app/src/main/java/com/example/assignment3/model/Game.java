@@ -9,7 +9,7 @@ public class Game {
 
 
     public int[][] map;
-    public int[][] squareScores;
+    public String[][] squareScores;
 
 
     private static Game instance;
@@ -18,18 +18,12 @@ public class Game {
     Random random = new Random();
 
 
-    private Game(int row, int col, int mines){
+    private Game(){
 
-        setNumMines(mines);
-        setMapSize(row, col);
-        map = new int[MAP_ROW][MAP_COLUMN];
-        squareScores = new int[MAP_ROW][MAP_COLUMN];
-        minePlaced = new boolean[MAP_ROW][MAP_COLUMN];
-        setMap();
     }
-    public static Game getGameInstance(int row, int col, int mines){
+    public static Game getGameInstance(){
         if(instance == null){
-            instance = new Game(row,col,mines);
+            instance = new Game();
         }
         return instance;
     }
@@ -37,12 +31,30 @@ public class Game {
 
 
     public int getBoardSize(){return MAP_COLUMN*MAP_ROW;}
+
+    public int getNumMines() {
+        return numMines;
+    }
+
+    public String getSquareScore(int row, int col){
+        return squareScores[row][col];
+    }
+
     public int getFound(){ return found; }
     public int getNumScans(){ return scans; }
+    public int getMAP_ROW(){
+        return MAP_ROW;
+    }
+    public int getMAP_COLUMN(){
+        return MAP_COLUMN;
+    }
 
     public void setMapSize(int row, int col){
         MAP_ROW = row;
         MAP_COLUMN = col;
+        map = new int[MAP_ROW][MAP_COLUMN];
+        squareScores = new String[MAP_ROW][MAP_COLUMN];
+        minePlaced = new boolean[MAP_ROW][MAP_COLUMN];
     }
 
 
@@ -90,27 +102,29 @@ public class Game {
 
         int count = 0;
 
-        if(minePlaced[row][col]){
+        if(minePlaced[row][col]){ // found the mine
             found++;
             minePlaced[row][col] = false;
+            squareScores[row][col] = "*";
         }else{
             //search the column
             for(int i = 0; i<MAP_ROW; i++){
-                if(map[i][col] == 1){
+                if(map[i][col] == 1 && minePlaced[i][col]){
                     count++;
                 }
             }
             //search row
             for(int i = 0; i<MAP_COLUMN; i++){
-                if(map[row][i] == 1){
+                if(map[row][i] == 1 && minePlaced[row][i]){
                     count++;
                 }
             }
             scans++;
+            squareScores[row][col] = String.valueOf(count);
 
         }
         System.out.println("count " + count);
-        squareScores[row][col] = count;
+
 
     }
 

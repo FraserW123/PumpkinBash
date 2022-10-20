@@ -1,23 +1,19 @@
 package com.example.assignment3;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.assignment3.model.Game;
 
 public class OptionsScreen extends AppCompatActivity {
 
-    int mines = 0;
-    int row = 0;
-    int col = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +27,6 @@ public class OptionsScreen extends AppCompatActivity {
     }
 
     private void createBoardSizeRadioButtons() {
-
         RadioGroup group = findViewById(R.id.radio_board_size);
         String [] boardOptions = getResources().getStringArray(R.array.board_size_options);
 
@@ -48,6 +43,7 @@ public class OptionsScreen extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
                 sizeofDimensions(boardSize);
 
+
             });
 
             //Add to radio group
@@ -56,7 +52,7 @@ public class OptionsScreen extends AppCompatActivity {
     }
 
     private void createMinesRadioButtons() {
-
+        Game game = Game.getGameInstance();
         RadioGroup group = findViewById(R.id.radio_group_mines);
         int [] num_mines = getResources().getIntArray(R.array.number_of_mines);
 
@@ -71,7 +67,7 @@ public class OptionsScreen extends AppCompatActivity {
             button.setOnClickListener(v -> {
                 Toast.makeText(OptionsScreen.this, "You selected "+numMine,
                         Toast.LENGTH_SHORT).show();
-                mines = numMine;
+                game.setNumMines(numMine);
             });
 
             //Add to radio group
@@ -80,7 +76,7 @@ public class OptionsScreen extends AppCompatActivity {
     }
 
     private void setSaveChanges() {
-        //Game game = Game.getGameInstance();
+        Game game = Game.getGameInstance();
         Button btn = findViewById(R.id.find_selected);
         btn.setOnClickListener(v -> {
             RadioGroup group_Mines = findViewById(R.id.radio_group_mines);
@@ -92,13 +88,13 @@ public class OptionsScreen extends AppCompatActivity {
             int idOfSelectedBoardSize = group_board_size.getCheckedRadioButtonId();
             RadioButton boardSelection = findViewById(idOfSelectedBoardSize);
 
-            if(mineSelection.getText() != null){
+            if(game.getNumMines() != 0){
                 String message = mineSelection.getText().toString();
                 String message2 = boardSelection.getText().toString();
                 Toast.makeText(OptionsScreen.this, "Adding game configuration: " + message +
                         " Board size: " + message2,
                         Toast.LENGTH_SHORT).show();
-                Game game = Game.getGameInstance(row, col, mines);
+
             }
             else{
                 Toast.makeText(OptionsScreen.this, "No option have been selected",
@@ -110,18 +106,20 @@ public class OptionsScreen extends AppCompatActivity {
     }
 
     private void sizeofDimensions(String size){
-        if(size.equals("4 x 6")){
-            row = 4;
-            col = 6;
-        }else if(size.equals("5 x 10")){
-            row = 5;
-            col = 10;
-        }else if(size.equals("6 x 15")){
-            row = 6;
-            col = 10;
-        }else{
-            row = 2;
-            col = 2;
+        Game game = Game.getGameInstance();
+        switch (size) {
+            case "4 x 6":
+                game.setMapSize(4, 6);
+                break;
+            case "5 x 10":
+                game.setMapSize(5, 10);
+                break;
+            case "6 x 15":
+                game.setMapSize(6, 15);
+                break;
+            default:
+                game.setMapSize(2, 2);
+                break;
         }
     }
 
