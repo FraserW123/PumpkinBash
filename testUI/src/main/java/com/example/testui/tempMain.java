@@ -14,6 +14,7 @@ public class tempMain {
         System.out.println("(3) 6x15");
         choice = scanner.nextInt();
 
+
         System.out.println("How many mines to play with?");
         System.out.println("(1) 6");
         System.out.println("(2) 10");
@@ -21,11 +22,14 @@ public class tempMain {
         System.out.println("(4) 20");
         int mines = scanner.nextInt();
 
-        Game game = new Game(choice, mines);
+        Game game = Game.getGameInstance(choice, mines);
+
         while(!game.foundAllMines()){
-            System.out.println("Select a position (" + 0 + "-" + game.getBoardSize()+")");
-            choice = scanner.nextInt();
-            game.checkMap(choice);
+            System.out.println("row?");
+            int row = scanner.nextInt();
+            System.out.println("col?");
+            int col = scanner.nextInt();
+            game.checkMap(row,col);
             game.getBoard();
             System.out.println("Scans: "+game.getNumScans());
             System.out.println("Mines found " + game.getFound());

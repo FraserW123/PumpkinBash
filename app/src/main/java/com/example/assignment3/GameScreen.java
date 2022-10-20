@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.assignment3.model.Game;
+
 public class GameScreen extends AppCompatActivity {
     private static final int NUM_ROWS = 6;
     private static final int NUM_COLS = 15;
@@ -53,6 +55,7 @@ public class GameScreen extends AppCompatActivity {
     }
 
     private void gridButtonClicked(){
+        //Game game = Game.getGameInstance();
         Toast.makeText(this, "Button clicked", Toast.LENGTH_SHORT).show();
     }
 
