@@ -2,7 +2,11 @@ package com.example.assignment3;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Path;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.View;
@@ -23,7 +27,7 @@ import com.example.assignment3.model.Game;
 public class GameScreen extends AppCompatActivity {
 
     Game game = Game.getGameInstance();
-
+    Button buttons[][] = new Button[OptionsScreen.getRows()][OptionsScreen.getCols()];
 
 
     @Override
@@ -68,10 +72,13 @@ public class GameScreen extends AppCompatActivity {
                         TableRow.LayoutParams.MATCH_PARENT,
                         1.0f));
 
-                int finalRow = row;
-                int finalCol = col;
+                final int finalRow = row;
+                final int finalCol = col;
+                button.setText("" + row + ", " + col);
+                button.setPadding(0, 0, 0,0);
+
                 button.setOnClickListener(v -> {
-                    gridButtonClicked(grid[finalRow][finalCol], finalRow, finalCol);
+                    gridButtonClicked(finalRow, finalCol);
                     showStats();
                     if(game.foundAllMines()){
                         alertMessage();
@@ -79,7 +86,9 @@ public class GameScreen extends AppCompatActivity {
                     }
                 });
                 tableRow.addView(button);
+                buttons[row][col] = button;
 
+                //lockButtonSizes(button);
 
             }
         }
@@ -110,12 +119,42 @@ public class GameScreen extends AppCompatActivity {
 
     }
 
-    private void gridButtonClicked(Button button, int row, int col){
+    private void gridButtonClicked(int row, int col){
+        Button button = buttons[row][col];
+        lockButtonSizes();
+
+        if(game.mineWhere(row, col)) {
+            int newWidth = button.getWidth();
+            int newHeight = button.getHeight();
+
+            Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.halloween_pumpkin);
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+            Resources resource = getResources();
+
+            button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+        }
+
         Game game = Game.getGameInstance();
         game.checkMap(row,col);
         String score = game.getSquareScore(row,col);
         button.setText(score);
+        Toast.makeText(this, "Button clicked: " + row + ", " + col, Toast.LENGTH_SHORT).show();
 
+    }
+
+    private void lockButtonSizes() {
+        for(int row = 0; row < game.getMAP_ROW(); row++){
+            for(int col = 0; col < game.getMAP_COLUMN(); col++){
+                Button button = buttons[row][col];
+                int width = button.getWidth();
+                button.setMinWidth(width);
+                button.setMaxWidth(width);
+
+                int height = button.getHeight();
+                button.setMinHeight(height);
+                button.setMaxHeight(height);
+            }
+        }
     }
 
     public static Intent makeIntent(Context context){
