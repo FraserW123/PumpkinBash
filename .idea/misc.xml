@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/layout/alert_box.xml" value="0.1" />
+        <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/layout/alert_message.xml" value="0.33" />
         <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/layout/game_screen.xml" value="0.33" />
         <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/layout/help_screen.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/layout/main_menu.xml" value="0.18802083333333333" />

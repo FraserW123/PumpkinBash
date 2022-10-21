@@ -4,20 +4,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Path;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.assignment3.model.Game;
 
 public class GameScreen extends AppCompatActivity {
-//    private static final int NUM_ROWS = 6;
-//    private static final int NUM_COLS = 15;
+
     Game game = Game.getGameInstance();
 
 
@@ -66,17 +70,26 @@ public class GameScreen extends AppCompatActivity {
 
                 int finalRow = row;
                 int finalCol = col;
-                button.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        gridButtonClicked(grid[finalRow][finalCol], finalRow, finalCol);
-                        showStats();
+                button.setOnClickListener(v -> {
+                    gridButtonClicked(grid[finalRow][finalCol], finalRow, finalCol);
+                    showStats();
+                    if(game.foundAllMines()){
+                        alertMessage();
+
                     }
                 });
                 tableRow.addView(button);
 
+
             }
         }
+    }
+
+    private void alertMessage(){
+        FragmentManager manager = getSupportFragmentManager();
+        AlertMessageFragment alert = new AlertMessageFragment();
+        alert.show(manager, "AlertMessage");
+
     }
 
     private void configureGame(){
@@ -102,7 +115,7 @@ public class GameScreen extends AppCompatActivity {
         game.checkMap(row,col);
         String score = game.getSquareScore(row,col);
         button.setText(score);
-        Toast.makeText(this, "Button clicked", Toast.LENGTH_SHORT).show();
+
     }
 
     public static Intent makeIntent(Context context){
