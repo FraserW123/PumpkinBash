@@ -15,7 +15,8 @@ import com.example.assignment3.model.Game;
 
 public class OptionsScreen extends AppCompatActivity {
 
-
+    private static int row = 6;
+    private static int col = 15;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,18 +113,30 @@ public class OptionsScreen extends AppCompatActivity {
         SharedPreferences prefs = context.getSharedPreferences("AppPrefs",MODE_PRIVATE);
         return prefs.getInt("Num mines", 0);
     }
+    public static int getRows(){
+        return row;
+    }
+    public static int getCols(){
+        return col;
+    }
 
     static public void sizeofDimensions(String size){
         Game game = Game.getGameInstance();
         switch (size) {
             case "4 x 6":
                 game.setMapSize(4, 6);
+                row = 4;
+                col = 6;
                 break;
             case "5 x 10":
                 game.setMapSize(5, 10);
+                row = 5;
+                col = 10;
                 break;
             case "6 x 15":
                 game.setMapSize(6, 15);
+                row = 6;
+                col = 15;
                 break;
             default:
                 game.setMapSize(2, 2);

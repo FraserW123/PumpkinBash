@@ -27,7 +27,7 @@ import com.example.assignment3.model.Game;
 public class GameScreen extends AppCompatActivity {
 
     Game game = Game.getGameInstance();
-
+    Button buttons[][] = new Button[OptionsScreen.getRows()][OptionsScreen.getCols()];
 
 
     @Override
@@ -78,7 +78,7 @@ public class GameScreen extends AppCompatActivity {
                 button.setPadding(0, 0, 0,0);
 
                 button.setOnClickListener(v -> {
-                    gridButtonClicked(grid[finalRow][finalCol], finalRow, finalCol);
+                    gridButtonClicked(finalRow, finalCol);
                     showStats();
                     if(game.foundAllMines()){
                         alertMessage();
@@ -86,6 +86,9 @@ public class GameScreen extends AppCompatActivity {
                     }
                 });
                 tableRow.addView(button);
+                buttons[row][col] = button;
+
+                //lockButtonSizes(button);
 
             }
         }
@@ -116,8 +119,9 @@ public class GameScreen extends AppCompatActivity {
 
     }
 
-    private void gridButtonClicked(Button button, int row, int col){
-        //lockButtonSizes(button);
+    private void gridButtonClicked(int row, int col){
+        Button button = buttons[row][col];
+        lockButtonSizes();
 
         if(game.mineWhere(row, col)) {
             int newWidth = button.getWidth();
@@ -138,9 +142,10 @@ public class GameScreen extends AppCompatActivity {
 
     }
 
-    private void lockButtonSizes(Button button) {
-        //for(int row = 0; row < game.getMAP_ROW(); row++){
-        //    for(int col = 0; col < game.getMAP_COLUMN(); col++){
+    private void lockButtonSizes() {
+        for(int row = 0; row < game.getMAP_ROW(); row++){
+            for(int col = 0; col < game.getMAP_COLUMN(); col++){
+                Button button = buttons[row][col];
                 int width = button.getWidth();
                 button.setMinWidth(width);
                 button.setMaxWidth(width);
@@ -148,8 +153,8 @@ public class GameScreen extends AppCompatActivity {
                 int height = button.getHeight();
                 button.setMinHeight(height);
                 button.setMaxHeight(height);
-        //    }
-       // }
+            }
+        }
     }
 
     public static Intent makeIntent(Context context){
