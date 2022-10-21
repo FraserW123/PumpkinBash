@@ -9,7 +9,7 @@ public class Game {
 
 
     public int[][] map;
-    public String[][] squareScores;
+    public int[][] squareScores;
 
 
     private static Game instance;
@@ -36,7 +36,7 @@ public class Game {
         return numMines;
     }
 
-    public String getSquareScore(int row, int col){
+    public int getSquareScore(int row, int col){
         return squareScores[row][col];
     }
 
@@ -59,7 +59,7 @@ public class Game {
         MAP_ROW = row;
         MAP_COLUMN = col;
         map = new int[MAP_ROW][MAP_COLUMN];
-        squareScores = new String[MAP_ROW][MAP_COLUMN];
+        squareScores = new int[MAP_ROW][MAP_COLUMN];
         minePlaced = new boolean[MAP_ROW][MAP_COLUMN];
     }
 
@@ -124,7 +124,7 @@ public class Game {
                 }
             }
 
-            squareScores[row][col] = String.valueOf(count);
+            squareScores[row][col] = count;
 
         }
         scans++;
@@ -140,6 +140,11 @@ public class Game {
         else{
             return false;
         }
+    }
+
+    public void deductScores(int row, int col){
+        int score = squareScores[row][col];
+        squareScores[row][col] = score - 1;
     }
 
 
