@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="Board_Row_Sizes">
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </integer-array>
+
+    <integer-array name="Board_Col_Sizes">
+        <item>6</item>
+        <item>10</item>
+        <item>15</item>
+    </integer-array>
+
+</resources>

@@ -108,7 +108,7 @@ public class Game {
         if(minePlaced[row][col]){ // found the mine
             found++;
             minePlaced[row][col] = false;
-            squareScores[row][col] = "*";
+            //squareScores[row][col] = "*";
         }else{
             //search the column
             for(int i = 0; i<MAP_ROW; i++){
@@ -130,6 +130,15 @@ public class Game {
         System.out.println("count " + count);
 
 
+    }
+
+    public boolean mineWhere(int row, int col){
+        if(minePlaced[row][col]){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 

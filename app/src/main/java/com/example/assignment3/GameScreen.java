@@ -2,7 +2,11 @@ package com.example.assignment3;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Path;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -64,8 +68,10 @@ public class GameScreen extends AppCompatActivity {
                         TableRow.LayoutParams.MATCH_PARENT,
                         1.0f));
 
-                int finalRow = row;
-                int finalCol = col;
+                final int finalRow = row;
+                final int finalCol = col;
+                button.setText("" + row + ", " + col);
+                button.setPadding(0, 0, 0,0);
                 button.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
@@ -98,11 +104,39 @@ public class GameScreen extends AppCompatActivity {
     }
 
     private void gridButtonClicked(Button button, int row, int col){
+        //lockButtonSizes(button);
+
+        if(game.mineWhere(row, col)) {
+            int newWidth = button.getWidth();
+            int newHeight = button.getHeight();
+
+            Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.halloween_pumpkin);
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+            Resources resource = getResources();
+
+            button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+        }
+
         Game game = Game.getGameInstance();
         game.checkMap(row,col);
         String score = game.getSquareScore(row,col);
         button.setText(score);
-        Toast.makeText(this, "Button clicked", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Button clicked: " + row + ", " + col, Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void lockButtonSizes(Button button) {
+        //for(int row = 0; row < game.getMAP_ROW(); row++){
+        //    for(int col = 0; col < game.getMAP_COLUMN(); col++){
+                int width = button.getWidth();
+                button.setMinWidth(width);
+                button.setMaxWidth(width);
+
+                int height = button.getHeight();
+                button.setMinHeight(height);
+                button.setMaxHeight(height);
+        //    }
+       // }
     }
 
     public static Intent makeIntent(Context context){
