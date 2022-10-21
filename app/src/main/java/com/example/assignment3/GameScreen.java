@@ -8,20 +8,24 @@ import android.graphics.BitmapFactory;
 import android.graphics.Path;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.assignment3.model.Game;
 
 public class GameScreen extends AppCompatActivity {
-//    private static final int NUM_ROWS = 6;
-//    private static final int NUM_COLS = 15;
+
     Game game = Game.getGameInstance();
 
 
@@ -72,17 +76,26 @@ public class GameScreen extends AppCompatActivity {
                 final int finalCol = col;
                 button.setText("" + row + ", " + col);
                 button.setPadding(0, 0, 0,0);
-                button.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v){
-                        gridButtonClicked(grid[finalRow][finalCol], finalRow, finalCol);
-                        showStats();
+
+                button.setOnClickListener(v -> {
+                    gridButtonClicked(grid[finalRow][finalCol], finalRow, finalCol);
+                    showStats();
+                    if(game.foundAllMines()){
+                        alertMessage();
+
                     }
                 });
                 tableRow.addView(button);
 
             }
         }
+    }
+
+    private void alertMessage(){
+        FragmentManager manager = getSupportFragmentManager();
+        AlertMessageFragment alert = new AlertMessageFragment();
+        alert.show(manager, "AlertMessage");
+
     }
 
     private void configureGame(){

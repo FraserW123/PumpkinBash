@@ -26,7 +26,6 @@ public class OptionsScreen extends AppCompatActivity {
         createBoardSizeRadioButtons();
         String savedSize = getBoardSize(this);
         int savedMines = getNumMines(this);
-        //setSaveChanges();
     }
 
     private void createBoardSizeRadioButtons() {

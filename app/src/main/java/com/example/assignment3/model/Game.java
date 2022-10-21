@@ -41,6 +41,9 @@ public class Game {
     }
 
     public int getFound(){ return found; }
+    public boolean foundAllMines(){
+        return found == numMines;
+    }
     public int getNumScans(){ return scans; }
     public int getMAP_ROW(){
         return MAP_ROW;
@@ -97,9 +100,7 @@ public class Game {
         }
     }
 
-    public boolean foundAllMines(){
-        return found == numMines;
-    }
+
 
     public void checkMap(int row, int col){
 
