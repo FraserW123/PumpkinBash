@@ -109,7 +109,7 @@ public class Game {
         if(minePlaced[row][col]){ // found the mine
             found++;
             minePlaced[row][col] = false;
-            //squareScores[row][col] = "*";
+
         }else{
             //search the column
             for(int i = 0; i<MAP_ROW; i++){
@@ -123,12 +123,16 @@ public class Game {
                     count++;
                 }
             }
-
+            if(squareScores[row][col] == 0 && map[row][col] != -1){ // to scan squares only once
+                scans++;
+            }
+            map[row][col] = -1; // indicates square has been scanned
             squareScores[row][col] = count;
 
+
         }
-        scans++;
-        System.out.println("count " + count);
+
+        //System.out.println("count " + count);
 
 
     }
