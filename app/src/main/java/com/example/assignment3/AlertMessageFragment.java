@@ -1,3 +1,6 @@
+/**
+ * Displays a pop up for when the user wins a game
+ */
 package com.example.assignment3;
 
 import android.app.AlertDialog;

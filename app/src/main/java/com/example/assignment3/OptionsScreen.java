@@ -1,3 +1,7 @@
+/**
+ * Provides the user with the choice to choose
+ * the size of the board and the number of mines
+ */
 package com.example.assignment3;
 
 import android.content.Context;

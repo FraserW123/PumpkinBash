@@ -1,3 +1,7 @@
+/**
+ * Creates the navigation screen so the user can access
+ * a new game, options, or the help menu
+ */
 package com.example.assignment3;
 
 import androidx.annotation.RequiresApi;

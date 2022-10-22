@@ -1,3 +1,7 @@
+/**
+ * The first screen the user sees
+ * and takes the user to the MainMenu
+ */
 package com.example.assignment3;
 
 import androidx.annotation.RequiresApi;
