@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class HelpScreen extends AppCompatActivity {
     TextView linkCreators;
-    TextView linkCiations;
+    TextView linkCitations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +23,8 @@ public class HelpScreen extends AppCompatActivity {
         linkCreators = findViewById(R.id.tv_creators);
         linkCreators.setMovementMethod(LinkMovementMethod.getInstance());
 
-        linkCiations = findViewById(R.id.tv_citations);
-        linkCiations.setMovementMethod(LinkMovementMethod.getInstance());
+        linkCitations = findViewById(R.id.tv_citations);
+        linkCitations.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     public static Intent makeIntent(Context context){
