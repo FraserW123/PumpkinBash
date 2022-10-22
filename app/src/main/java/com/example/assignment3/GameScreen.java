@@ -10,6 +10,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -24,10 +26,12 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.assignment3.model.Game;
 
+import java.util.concurrent.TimeUnit;
+
 public class GameScreen extends AppCompatActivity {
 
     Game game = Game.getGameInstance();
-    Button buttons[][] = new Button[OptionsScreen.getRows()][OptionsScreen.getCols()];
+    Button[][] buttons = new Button[OptionsScreen.getRows()][OptionsScreen.getCols()];
 
 
     @Override
@@ -54,7 +58,7 @@ public class GameScreen extends AppCompatActivity {
         Game game = Game.getGameInstance();
 
 
-        Button[][] grid = new Button[game.getMAP_ROW()][game.getMAP_COLUMN()];
+        //Button[][] grid = new Button[game.getMAP_ROW()][game.getMAP_COLUMN()];
         TableLayout table = findViewById(R.id.tableForButtons);
         for (int row = 0; row < game.getMAP_ROW(); row++){
             TableRow tableRow = new TableRow(this);
@@ -66,7 +70,6 @@ public class GameScreen extends AppCompatActivity {
 
             for (int col = 0; col < game.getMAP_COLUMN(); col++){
                 Button button = new Button(this);
-                grid[row][col] = button;
                 button.setLayoutParams(new TableRow.LayoutParams(
                         TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT,
@@ -74,7 +77,6 @@ public class GameScreen extends AppCompatActivity {
 
                 final int finalRow = row;
                 final int finalCol = col;
-                //button.setText("" + row + ", " + col);
                 button.setPadding(0, 0, 0,0);
 
                 button.setOnClickListener(v -> {
@@ -87,8 +89,6 @@ public class GameScreen extends AppCompatActivity {
                 });
                 tableRow.addView(button);
                 buttons[row][col] = button;
-
-                //lockButtonSizes(button);
 
             }
         }
@@ -133,10 +133,13 @@ public class GameScreen extends AppCompatActivity {
 
             button.setBackground(new BitmapDrawable(resource, scaledBitmap));
 
+
             refreshDisplay(row, col);
+
         }
 
         game.checkMap(row, col);
+        scanAnimation(row, col);
         int score = game.getSquareScore(row, col);
         if(isNotMine){
             System.out.println("this happened");
@@ -147,14 +150,17 @@ public class GameScreen extends AppCompatActivity {
 
     }
 
-    private void refreshDisplay(int row, int col) {
+    private void refreshDisplay(int row, int col)  {
         for(int refresh_row = 0; refresh_row < game.getMAP_ROW(); refresh_row++) {
             int score = game.getSquareScore(refresh_row,col);
             if(score > 0 && refresh_row != row){
 
                 game.deductScores(refresh_row, col);
                 buttons[refresh_row][col].setText(String.valueOf(score-1));
+
             }
+            //Animation animation= AnimationUtils.loadAnimation(this, R.anim.blink_anim);
+            //buttons[refresh_row][col].startAnimation(animation);
         }
 
         for (int refresh_col = 0; refresh_col < game.getMAP_COLUMN(); refresh_col++) {
@@ -164,7 +170,49 @@ public class GameScreen extends AppCompatActivity {
                 game.deductScores(row, refresh_col);
                 buttons[row][refresh_col].setText(String.valueOf(score-1));
             }
+            //Animation animation= AnimationUtils.loadAnimation(this, R.anim.blink_anim);
+            //buttons[row][refresh_col].startAnimation(animation);
         }
+
+    }
+
+    private void scanAnimation(int row, int col){
+        for(int refresh_row = 0; refresh_row < game.getMAP_ROW(); refresh_row++) {
+
+
+
+            Animation animation= AnimationUtils.loadAnimation(this, R.anim.blink_anim);
+            try {
+                TimeUnit.MILLISECONDS.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            buttons[refresh_row][col].startAnimation(animation);
+
+
+
+
+        }
+
+        for (int refresh_col = 0; refresh_col < game.getMAP_COLUMN(); refresh_col++) {
+
+
+
+            Animation animation= AnimationUtils.loadAnimation(this, R.anim.blink_anim);
+            try {
+                TimeUnit.MILLISECONDS.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            buttons[row][refresh_col].startAnimation(animation);
+
+
+
+
+        }
+
+
+
     }
 
     private void lockButtonSizes() {

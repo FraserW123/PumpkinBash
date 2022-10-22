@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -22,11 +21,10 @@ public class OptionsScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.options_screen);
 
-
         createMinesRadioButtons();
         createBoardSizeRadioButtons();
-        String savedSize = getBoardSize(this);
-        int savedMines = getNumMines(this);
+        getBoardSize(this);
+        getNumMines(this);
     }
 
     private void createBoardSizeRadioButtons() {
@@ -144,43 +142,12 @@ public class OptionsScreen extends AppCompatActivity {
         }
     }
 
+//    public static int getRow(){return row;}
+//    public static int getCol(){return col;}
+
     public static Intent makeIntent(Context context){
         return new Intent(context, OptionsScreen.class);
     }
-
-
-
-
-//    private void setSaveChanges() {
-//        Game game = Game.getGameInstance();
-//        Button btn = findViewById(R.id.find_selected);
-//        btn.setOnClickListener(v -> {
-//
-//            if(game.getNumMines() != 0){
-//                RadioGroup group_Mines = findViewById(R.id.radio_group_mines);
-//                int idOfSelectedMines = group_Mines.getCheckedRadioButtonId();
-//                RadioButton mineSelection = findViewById(idOfSelectedMines);
-//
-//
-//                RadioGroup group_board_size = findViewById(R.id.radio_board_size);
-//                int idOfSelectedBoardSize = group_board_size.getCheckedRadioButtonId();
-//                RadioButton boardSelection = findViewById(idOfSelectedBoardSize);
-//
-//                String message = mineSelection.getText().toString();
-//                String message2 = boardSelection.getText().toString();
-//                Toast.makeText(OptionsScreen.this, "Adding game configuration: " + message +
-//                        " Board size: " + message2,
-//                        Toast.LENGTH_SHORT).show();
-//
-//            }
-//            else{
-//                Toast.makeText(OptionsScreen.this, "No option have been selected",
-//                        Toast.LENGTH_SHORT).show();
-//
-//            }
-//
-//        });
-//    }
 
 
 }
