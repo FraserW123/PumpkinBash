@@ -7,7 +7,6 @@ package com.example.assignment3;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -52,13 +51,10 @@ public class OptionsScreen extends AppCompatActivity {
 
             //Add to radio group
             group.addView(button);
-            System.out.println(boardSize + " vs " + getBoardSize(this));
+
             if(boardSize.equals(getBoardSize(this))){
                 sizeofDimensions(boardSize);
                 button.setChecked(true);
-            }else{
-
-                System.out.println("false");
             }
         }
         //group

@@ -5,28 +5,23 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Path;
+
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.os.Message;
-import android.view.View;
+
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.LinearLayout;
+
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
 import com.example.assignment3.model.Game;
 
-import java.util.concurrent.TimeUnit;
+
 
 public class GameScreen extends AppCompatActivity {
 
@@ -108,7 +103,7 @@ public class GameScreen extends AppCompatActivity {
         game.setNumMines(OptionsScreen.getNumMines(this));
         OptionsScreen.sizeofDimensions(OptionsScreen.getBoardSize(this));
         if(game.getMAP_ROW() == 0 && game.getMAP_COLUMN() == 0){
-            System.out.println("Nothing selected");
+
             game.setMapSize(4,6);
         }
         if(game.getNumMines() == 0){
@@ -143,7 +138,6 @@ public class GameScreen extends AppCompatActivity {
 
         int score = game.getSquareScore(row, col);
         if(isNotMine){
-            System.out.println("this happened");
             button.setText(String.valueOf(score));
         }
     }

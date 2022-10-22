@@ -66,22 +66,6 @@ public class Game {
         numMines = mines;
     }
 
-    public void getBoard(){
-        System.out.println("board size = " + getBoardSize());
-        for(int row = 0; row<MAP_ROW; row++){
-            for(int col = 0; col < MAP_COLUMN; col++){
-                if(map[row][col] != 0 && !minePlaced[row][col]){
-                    System.out.print("* ");
-                }
-                else{
-                    System.out.print(squareScores[row][col] + " ");
-                }
-            }
-            System.out.println();
-        }
-
-    }
-
     public void setMap(){
 
         for(int i = 0; i<numMines; i++){
@@ -90,9 +74,8 @@ public class Game {
             while(map[setMineRow][setMineCol] != 0){
                 setMineRow = random.nextInt(MAP_ROW);
                 setMineCol = random.nextInt(MAP_COLUMN);
-                //System.out.println("Repeat number replaced with " + setIndex);
+
             }
-            System.out.println("Placed mine at position " + setMineRow +" x " + setMineCol);
             minePlaced[setMineRow][setMineCol] = true;
             map[setMineRow][setMineCol] = 1;
         }
