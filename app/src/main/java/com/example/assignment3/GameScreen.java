@@ -80,6 +80,7 @@ public class GameScreen extends AppCompatActivity {
                 button.setPadding(0, 0, 0,0);
 
                 button.setOnClickListener(v -> {
+                    scanAnimation(finalRow, finalCol);
                     gridButtonClicked(finalRow, finalCol);
                     showStats();
                     if(game.foundAllMines()){
@@ -139,7 +140,7 @@ public class GameScreen extends AppCompatActivity {
         }
 
         game.checkMap(row, col);
-        scanAnimation(row, col);
+
         int score = game.getSquareScore(row, col);
         if(isNotMine){
             System.out.println("this happened");
@@ -177,41 +178,25 @@ public class GameScreen extends AppCompatActivity {
     }
 
     private void scanAnimation(int row, int col){
-        for(int refresh_row = 0; refresh_row < game.getMAP_ROW(); refresh_row++) {
-
-
-
-            Animation animation= AnimationUtils.loadAnimation(this, R.anim.blink_anim);
-            try {
-                TimeUnit.MILLISECONDS.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            buttons[refresh_row][col].startAnimation(animation);
-
-
-
-
-        }
-
-        for (int refresh_col = 0; refresh_col < game.getMAP_COLUMN(); refresh_col++) {
-
-
+        int count = 0;
+        for(int refresh = 1; refresh < game.getMAP_COLUMN(); refresh++) {
 
             Animation animation= AnimationUtils.loadAnimation(this, R.anim.blink_anim);
-            try {
-                TimeUnit.MILLISECONDS.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            animation.setStartOffset(count);
+            if(row+refresh < game.getMAP_ROW()){
+                buttons[row+refresh][col].startAnimation(animation);
             }
-            buttons[row][refresh_col].startAnimation(animation);
-
-
-
-
+            if(row-refresh >= 0){
+                buttons[row-refresh][col].startAnimation(animation);
+            }
+            if(col + refresh < game.getMAP_COLUMN()){
+                buttons[row][refresh+col].startAnimation(animation);
+            }
+            if(col-refresh >= 0){
+                buttons[row][col-refresh].startAnimation(animation);
+            }
+            count+= 500;
         }
-
-
 
     }
 
