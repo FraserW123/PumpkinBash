@@ -5,11 +5,11 @@ public class Game {
     int MAP_ROW = 0;
     int MAP_COLUMN = 0;
     private int numMines;
-    boolean[][] minePlaced;
+    private boolean[][] minePlaced;
 
 
-    public int[][] map;
-    public int[][] squareScores;
+    private int[][] map;
+    private int[][] squareScores;
 
 
     private static Game instance;
@@ -131,9 +131,6 @@ public class Game {
 
 
         }
-
-        //System.out.println("count " + count);
-
 
     }
 
