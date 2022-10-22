@@ -1,3 +1,7 @@
+/**
+ * Used to setup the random pumpkins
+ * and used to check how many pumpkins are in each row and column
+ */
 package com.example.assignment3.model;
 import java.util.Random;
 
@@ -7,16 +11,13 @@ public class Game {
     private int numMines;
     private boolean[][] minePlaced;
 
-
     private int[][] map;
     private int[][] squareScores;
-
 
     private static Game instance;
     private int scans;
     private int found = 0;
     Random random = new Random();
-
 
     private Game(){
 
@@ -27,8 +28,6 @@ public class Game {
         }
         return instance;
     }
-
-
 
     public int getBoardSize(){return MAP_COLUMN*MAP_ROW;}
 
@@ -62,7 +61,6 @@ public class Game {
         squareScores = new int[MAP_ROW][MAP_COLUMN];
         minePlaced = new boolean[MAP_ROW][MAP_COLUMN];
     }
-
 
     public void setNumMines(int mines){
         numMines = mines;
@@ -99,8 +97,6 @@ public class Game {
             map[setMineRow][setMineCol] = 1;
         }
     }
-
-
 
     public void checkMap(int row, int col){
 

@@ -4,6 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/spooky_background_game_screen"
     tools:context=".HelpScreen">
 
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="654dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="40dp"
+        android:text="Welcome to the Pumpkin Bash! The objective of the game is to smash all the pumpkins in the least amount of scans. The pumpkins are all hidden and when you click on a button it will reveal a pumpkin or a number. The numbers indicate how many pumpkins are left in that row and column. You can also click on a pumpkin to reveal the number of pumpkins in that row or column.  A counter for how many scans you used appears in the top right and how many pumpkins are left is shown in the top left. Good luck and have fun! :)"
+        android:textColor="#F87146"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_creators"
+        android:layout_width="654dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/hyperlink"
+        android:textColor="#F87146"
+        android:textColorLink="#FF9500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+
+    <TextView
+        android:id="@+id/tv_citations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/citations_hyperlinks"
+        android:textColor="#F87146"
+        android:textColorLink="#FF9500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_creators" />
 </androidx.constraintlayout.widget.ConstraintLayout>
