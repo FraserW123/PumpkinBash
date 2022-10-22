@@ -74,7 +74,7 @@ public class GameScreen extends AppCompatActivity {
 
                 final int finalRow = row;
                 final int finalCol = col;
-                button.setText("" + row + ", " + col);
+                //button.setText("" + row + ", " + col);
                 button.setPadding(0, 0, 0,0);
 
                 button.setOnClickListener(v -> {
@@ -120,26 +120,51 @@ public class GameScreen extends AppCompatActivity {
     }
 
     private void gridButtonClicked(int row, int col){
+        boolean isNotMine = true;
         Button button = buttons[row][col];
         lockButtonSizes();
-
         if(game.mineWhere(row, col)) {
             int newWidth = button.getWidth();
             int newHeight = button.getHeight();
-
+            isNotMine = false;
             Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.halloween_pumpkin);
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
             Resources resource = getResources();
 
             button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+
+            refreshDisplay(row, col);
         }
 
-        Game game = Game.getGameInstance();
-        game.checkMap(row,col);
-        String score = game.getSquareScore(row,col);
-        button.setText(score);
+        game.checkMap(row, col);
+        int score = game.getSquareScore(row, col);
+        if(isNotMine){
+            System.out.println("this happened");
+            button.setText(String.valueOf(score));
+        }
+
         Toast.makeText(this, "Button clicked: " + row + ", " + col, Toast.LENGTH_SHORT).show();
 
+    }
+
+    private void refreshDisplay(int row, int col) {
+        for(int refresh_row = 0; refresh_row < game.getMAP_ROW(); refresh_row++) {
+            int score = game.getSquareScore(refresh_row,col);
+            if(score > 0 && refresh_row != row){
+
+                game.deductScores(refresh_row, col);
+                buttons[refresh_row][col].setText(String.valueOf(score-1));
+            }
+        }
+
+        for (int refresh_col = 0; refresh_col < game.getMAP_COLUMN(); refresh_col++) {
+            int score = game.getSquareScore(row,refresh_col);
+            if(score > 0 && refresh_col != col){
+
+                game.deductScores(row, refresh_col);
+                buttons[row][refresh_col].setText(String.valueOf(score-1));
+            }
+        }
     }
 
     private void lockButtonSizes() {

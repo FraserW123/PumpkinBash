@@ -9,7 +9,7 @@ public class Game {
 
 
     public int[][] map;
-    public String[][] squareScores;
+    public int[][] squareScores;
 
 
     private static Game instance;
@@ -36,7 +36,7 @@ public class Game {
         return numMines;
     }
 
-    public String getSquareScore(int row, int col){
+    public int getSquareScore(int row, int col){
         return squareScores[row][col];
     }
 
@@ -59,7 +59,7 @@ public class Game {
         MAP_ROW = row;
         MAP_COLUMN = col;
         map = new int[MAP_ROW][MAP_COLUMN];
-        squareScores = new String[MAP_ROW][MAP_COLUMN];
+        squareScores = new int[MAP_ROW][MAP_COLUMN];
         minePlaced = new boolean[MAP_ROW][MAP_COLUMN];
     }
 
@@ -109,7 +109,7 @@ public class Game {
         if(minePlaced[row][col]){ // found the mine
             found++;
             minePlaced[row][col] = false;
-            //squareScores[row][col] = "*";
+
         }else{
             //search the column
             for(int i = 0; i<MAP_ROW; i++){
@@ -123,12 +123,16 @@ public class Game {
                     count++;
                 }
             }
+            if(squareScores[row][col] == 0 && map[row][col] != -1){ // to scan squares only once
+                scans++;
+            }
+            map[row][col] = -1; // indicates square has been scanned
+            squareScores[row][col] = count;
 
-            squareScores[row][col] = String.valueOf(count);
 
         }
-        scans++;
-        System.out.println("count " + count);
+
+        //System.out.println("count " + count);
 
 
     }
@@ -140,6 +144,11 @@ public class Game {
         else{
             return false;
         }
+    }
+
+    public void deductScores(int row, int col){
+        int score = squareScores[row][col];
+        squareScores[row][col] = score - 1;
     }
 
 

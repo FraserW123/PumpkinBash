@@ -10,6 +10,7 @@
         <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/layout/main_menu.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/layout/options_screen.xml" value="0.33" />
         <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/menu/menu_toolbar.xml" value="0.19375" />
+        <entry key="..\:/Users/frase/AndroidStudioProjects/assignment3/app/src/main/res/layout/game_screen.xml" value="0.33" />
         <entry key="..\:/Users/lazar/AndroidStudioProjects/assignment3/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/lazar/AndroidStudioProjects/assignment3/app/src/main/res/layout/activity_welcome_screen.xml" value="0.4" />
         <entry key="..\:/Users/lazar/AndroidStudioProjects/assignment3/app/src/main/res/layout/game_screen.xml" value="0.1940222897669706" />
@@ -18,7 +19,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

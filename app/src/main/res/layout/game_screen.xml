@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/spooky_background_game_screen"
     tools:context=".GameScreen">
 
+    <!--https://pngtree.com/freebackground/scary-graveyard-in-the-woods-halloween-background_1154763.html-->
     <TableLayout
         android:id="@+id/tableForButtons"
         android:layout_width="wrap_content"
@@ -24,9 +26,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/scans_used"
+        android:textSize="15dp"
+        android:textColor="#FF9800"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.951"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.035" />
@@ -36,9 +40,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="hello"
+        android:textSize="15dp"
+        android:textColor="#FF9800"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.085"
+        app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.035" />
