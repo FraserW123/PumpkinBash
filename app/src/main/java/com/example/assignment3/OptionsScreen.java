@@ -3,6 +3,7 @@ package com.example.assignment3;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -121,11 +122,6 @@ public class OptionsScreen extends AppCompatActivity {
     static public void sizeofDimensions(String size){
         Game game = Game.getGameInstance();
         switch (size) {
-            case "4 x 6":
-                game.setMapSize(4, 6);
-                row = 4;
-                col = 6;
-                break;
             case "5 x 10":
                 game.setMapSize(5, 10);
                 row = 5;
@@ -137,13 +133,14 @@ public class OptionsScreen extends AppCompatActivity {
                 col = 15;
                 break;
             default:
-                game.setMapSize(2, 2);
-                break;
+                game.setMapSize(4, 6);
+                row = 4;
+                col = 6;
+
+
         }
     }
 
-//    public static int getRow(){return row;}
-//    public static int getCol(){return col;}
 
     public static Intent makeIntent(Context context){
         return new Intent(context, OptionsScreen.class);

@@ -143,11 +143,11 @@ public class GameScreen extends AppCompatActivity {
 
         int score = game.getSquareScore(row, col);
         if(isNotMine){
-            System.out.println("this happened");
+            //System.out.println("this happened");
             button.setText(String.valueOf(score));
         }
 
-        Toast.makeText(this, "Button clicked: " + row + ", " + col, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Button clicked: " + row + ", " + col, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -155,24 +155,18 @@ public class GameScreen extends AppCompatActivity {
         for(int refresh_row = 0; refresh_row < game.getMAP_ROW(); refresh_row++) {
             int score = game.getSquareScore(refresh_row,col);
             if(score > 0 && refresh_row != row){
-
                 game.deductScores(refresh_row, col);
                 buttons[refresh_row][col].setText(String.valueOf(score-1));
 
             }
-            //Animation animation= AnimationUtils.loadAnimation(this, R.anim.blink_anim);
-            //buttons[refresh_row][col].startAnimation(animation);
         }
 
         for (int refresh_col = 0; refresh_col < game.getMAP_COLUMN(); refresh_col++) {
             int score = game.getSquareScore(row,refresh_col);
             if(score > 0 && refresh_col != col){
-
                 game.deductScores(row, refresh_col);
                 buttons[row][refresh_col].setText(String.valueOf(score-1));
             }
-            //Animation animation= AnimationUtils.loadAnimation(this, R.anim.blink_anim);
-            //buttons[row][refresh_col].startAnimation(animation);
         }
 
     }
@@ -180,9 +174,9 @@ public class GameScreen extends AppCompatActivity {
     private void scanAnimation(int row, int col){
         int count = 0;
         for(int refresh = 1; refresh < game.getMAP_COLUMN(); refresh++) {
-
             Animation animation= AnimationUtils.loadAnimation(this, R.anim.blink_anim);
             animation.setStartOffset(count);
+
             if(row+refresh < game.getMAP_ROW()){
                 buttons[row+refresh][col].startAnimation(animation);
             }
@@ -195,9 +189,8 @@ public class GameScreen extends AppCompatActivity {
             if(col-refresh >= 0){
                 buttons[row][col-refresh].startAnimation(animation);
             }
-            count+= 500;
+            count += 500;
         }
-
     }
 
     private void lockButtonSizes() {

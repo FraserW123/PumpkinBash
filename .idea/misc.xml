@@ -3,12 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/drawable/ic_baseline_arrow_upward_24.xml" value="0.258" />
+        <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/drawable/ic_baseline_arrow_upward_25.xml" value="0.258" />
+        <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/drawable/zoomin.xml" value="0.257" />
         <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/layout/alert_box.xml" value="0.1" />
         <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/layout/alert_message.xml" value="0.33" />
         <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/layout/game_screen.xml" value="0.33" />
         <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/layout/help_screen.xml" value="0.18802083333333333" />
-        <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/layout/main_menu.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/layout/main_menu.xml" value="0.33" />
         <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/layout/options_screen.xml" value="0.33" />
+        <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/layout/welcome_screen.xml" value="0.33" />
         <entry key="..\:/Users/Fraser/AndroidStudioProjects/assignment3/app/src/main/res/menu/menu_toolbar.xml" value="0.19375" />
         <entry key="..\:/Users/frase/AndroidStudioProjects/assignment3/app/src/main/res/layout/game_screen.xml" value="0.33" />
         <entry key="..\:/Users/lazar/AndroidStudioProjects/assignment3/app/src/main/res/layout/activity_main.xml" value="0.264" />
@@ -28,7 +32,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.33" />
+        <option name="scale" value="0.36666666666666664" />
       </ProjectState>
     </option>
   </component>

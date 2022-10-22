@@ -8,7 +8,10 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class MainMenu extends AppCompatActivity {
@@ -18,10 +21,16 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
 
+        ImageView ghost = findViewById(R.id.ghostImage);
+        Animation zoom = AnimationUtils.loadAnimation(this,R.anim.zoomin);
+        ghost.startAnimation(zoom);
+
         setupMainMenu();
         setupHelpScreen();
         setupOptionsScreen();
     }
+
+
 
     private void setupOptionsScreen() {
         Button btn = findViewById(R.id.btnOptions);
