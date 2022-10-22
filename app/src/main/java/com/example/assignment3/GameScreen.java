@@ -80,6 +80,7 @@ public class GameScreen extends AppCompatActivity {
                 button.setPadding(0, 0, 0,0);
 
                 button.setOnClickListener(v -> {
+                    scanAnimation(finalRow, finalCol);
                     gridButtonClicked(finalRow, finalCol);
                     showStats();
                     if(game.foundAllMines()){
@@ -139,7 +140,7 @@ public class GameScreen extends AppCompatActivity {
         }
 
         game.checkMap(row, col);
-        scanAnimation(row, col);
+
         int score = game.getSquareScore(row, col);
         if(isNotMine){
             System.out.println("this happened");
@@ -177,80 +178,25 @@ public class GameScreen extends AppCompatActivity {
     }
 
     private void scanAnimation(int row, int col){
-       /* for(int refresh_row = 0; refresh_row < game.getMAP_ROW(); refresh_row++) {
+        int count = 0;
+        for(int refresh = 1; refresh < game.getMAP_COLUMN(); refresh++) {
 
-
-            Animation animation = AnimationUtils.loadAnimation(this, R.anim.blink_anim);
-            try {
-                TimeUnit.MILLISECONDS.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            buttons[refresh_row][col].startAnimation(animation);
-
-
-        }
-
-        for (int refresh_col = 0; refresh_col < game.getMAP_COLUMN(); refresh_col++) {
-
-            Animation animation = AnimationUtils.loadAnimation(this, R.anim.blink_anim);
-            try {
-                TimeUnit.MILLISECONDS.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            buttons[row][refresh_col].startAnimation(animation);
-
-        }*/
-        int count = 500;
-        int row_top = row;
-        //int col_top = col;
-        int row_bottom = row;
-        //int col_bottom = col;;
-        //int row_left = row;
-        int col_left = col;;
-        //int row_right = row;
-        int col_right = col;;
-        //Animation animation = AnimationUtils.loadAnimation(this, R.anim.blink_anim);
-        //buttons[row][col].startAnimation(animation);
-
-        for(int refresh_row = 0; refresh_row < game.getMAP_ROW(); refresh_row++) {
-           /* for (int refresh_col = 0; refresh_col < game.getMAP_COLUMN(); refresh_col++) {
-                Animation animation = AnimationUtils.loadAnimation(this, R.anim.blink_anim);
-                animation.setStartOffset(20);
-                buttons[row][col].startAnimation(animation);
-            }*/
-            //Animation animation = AnimationUtils.loadAnimation(this, R.anim.blink_anim);
-            row_top = row_top - 1;
-            //col_top;
-            row_bottom = row_bottom + 1;
-            //col_bottom;
-            //row_left;
-            col_left = col_left - 1;
-            //row_right;
-            col_right = col_right + 1;
-            Animation animation = AnimationUtils.loadAnimation(this, R.anim.blink_anim);
-            buttons[row][col].startAnimation(animation);
+            Animation animation= AnimationUtils.loadAnimation(this, R.anim.blink_anim);
             animation.setStartOffset(count);
-            if(row_top >= 0) {
-                buttons[row_top][col].startAnimation(animation);
+            if(row+refresh < game.getMAP_ROW()){
+                buttons[row+refresh][col].startAnimation(animation);
             }
-            if(row_bottom < game.getMAP_ROW()) {
-                buttons[row_bottom][col].startAnimation(animation);
+            if(row-refresh >= 0){
+                buttons[row-refresh][col].startAnimation(animation);
             }
-            if(col_left >= 0) {
-                buttons[row][col_left].startAnimation(animation);
+            if(col + refresh < game.getMAP_COLUMN()){
+                buttons[row][refresh+col].startAnimation(animation);
             }
-            if(col_right <= game.getMAP_COLUMN()) {
-                buttons[row][col_right].startAnimation(animation);
+            if(col-refresh >= 0){
+                buttons[row][col-refresh].startAnimation(animation);
             }
-
-
-            count += 500;
-
+            count+= 500;
         }
-
-
 
     }
 
